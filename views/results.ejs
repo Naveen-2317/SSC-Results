@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSC Result</title>
+  <link rel="stylesheet" href="/css/resultStyles.css" />
+</head>
+
+<body>
+  <% if (results) { %>
+    <% let hasFailed=false; let subjects=Object.keys(results.marks); for (let i=0; i < subjects.length; i++) { if
+      (results.marks[subjects[i]] < 36) { hasFailed=true; break; } } let overAllResult="" ; if (hasFailed) {
+      overAllResult="Fail" ; } else if (results.totalMarks>= 540) {
+      overAllResult = "Distinction";
+      } else if (results.totalMarks >= 480) {
+      overAllResult = "First Class";
+      } else if (results.totalMarks >= 360) {
+      overAllResult = "Second Class";
+      } else {
+      overAllResult = "Third Class";
+      }
+      %>
+
+      <div class="student-info">
+        <h2>Name: <span>
+            <%= results.name %>
+          </span></h2>
+        <h2>Roll No: <span>
+            <%= results.rollNo %>
+          </span></h2>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Subjects</th>
+            <th>Maximum Marks</th>
+            <th>Marks Obtained</th>
+            <th>Pass/Fail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ["telugu", "hindi" , "english" , "maths" , "science" , "social" ].forEach(subject=> { %>
+            <tr>
+              <td>
+                <%= subject.charAt(0).toUpperCase() + subject.slice(1) %>
+              </td>
+              <td>100</td>
+              <td>
+                <%= results.marks[subject] %>
+              </td>
+              <td class="<%= results.marks[subject] >= 36 ? 'pass' : 'fail' %>">
+                <%= results.marks[subject]>= 36 ? "Pass" : "Fail" %>
+              </td>
+            </tr>
+            <% }); %>
+              <tr>
+                <td>Grand Total</td>
+                <td>600</td>
+                <td>
+                  <%= results.totalMarks %>
+                </td>
+                <td class="<%= overAllResult === 'Fail' ? 'fail' : 'pass' %>">
+                  <%= overAllResult %>
+                </td>
+              </tr>
+        </tbody>
+      </table>
+      <div class="center-container">
+        <button class="home-btn">
+          <a href="/">Home</a>
+        </button>
+      </div>
+
+
+      <% } else { %>
+        <h3>
+          <%= message %>
+        </h3>
+        <% } %>
+</body>
+
+</html>

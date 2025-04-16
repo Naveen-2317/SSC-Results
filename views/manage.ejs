@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Students</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/manage.css" />
+</head>
+
+<body>
+  <h1>STUDENT MANAGEMENT</h1>
+
+  <nav>
+    <a href="/add"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+  </nav>
+
+  <% if (allStudents && allStudents.length> 0) { %>
+    <% allStudents.forEach(student=> { %>
+      <ul class="student-card">
+        <div class="icon-actions">
+          <a href="/update/<%= student.rollNo %>" title="Edit">
+            <i class="fa-solid fa-pen"></i>
+          </a>
+          <a href="#" class="delete-btn" data-rollno="<%= student.rollNo %>" title="Delete">
+            <i class="fa-solid fa-trash" style="color: red;"></i>
+          </a>
+        </div>
+        <li><strong>Student Name:</strong>
+          <%= student.name %>
+        </li>
+        <li><strong>Student Roll No:</strong>
+          <%= student.rollNo %>
+        </li>
+        <li>
+          <div class="subjects">
+            <div class="subject"><strong>Telugu:</strong>
+              <%= student.marks.telugu %>
+            </div>
+            <div class="subject"><strong>English:</strong>
+              <%= student.marks.english %>
+            </div>
+            <div class="subject"><strong>Hindi:</strong>
+              <%= student.marks.hindi %>
+            </div>
+            <div class="subject"><strong>Maths:</strong>
+              <%= student.marks.maths %>
+            </div>
+            <div class="subject"><strong>Science:</strong>
+              <%= student.marks.science %>
+            </div>
+            <div class="subject"><strong>Social:</strong>
+              <%= student.marks.social %>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <% }) %>
+        <% } else { %>
+          <p>No students found.</p>
+          <% } %>
+            <script>
+              document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                  e.preventDefault();
+                  const rollNo = button.dataset.rollno;
+                  if (confirm("Are you sure you want to delete this student?")) {
+                    try {
+                      const response = await fetch(`/api/admin/deleteStudent/${rollNo}`, {
+                        method: 'DELETE'
+                      });
+                      if (response.ok) {
+                        // Reload the page to reflect the change
+                        location.reload();
+                      } else {
+                        alert("Failed to delete student");
+                      }
+                    } catch (err) {
+                      console.error(err);
+                      alert("Something went wrong");
+                    }
+                  }
+                });
+              });
+            </script>
+
+</body>
+
+</html>

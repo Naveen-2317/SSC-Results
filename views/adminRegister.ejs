@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminRegister</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/css/register.css" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AdminRegister</title>
+        
+    </head>
+
+<body>
+    <form action="/api/admin/register" method="post">
+        <label for="adminName">adminName</label>
+        <input type="text" id="adminName" name="adminName">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Submit</button>
+        <h3 class="error"></h3>
+    </form>
+    <script>
+        $(document).ready(function () {
+          <% if (typeof message !== 'undefined') { %>
+                // alert("<%= message %>");
+                $(".error").text("<%= message %>");
+          <% } %>     
+        });
+    </script>
+</body>
+
+</html>

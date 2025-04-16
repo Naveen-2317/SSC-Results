@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdminLogin</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="/css/login.css" />
+</head>
+
+<body>
+  <form action="/api/admin/login" method="post">
+    <h2>Admin Login</h2>
+    <h3 class="error"></h3>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required />
+
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    $(document).ready(function () {
+      <% if (typeof message !== 'undefined') { %>
+        // alert("<%= message %>");
+        $(".error").text("<%= message %>");
+      <% } %>     
+    })
+  </script>
+</body>
+
+</html>

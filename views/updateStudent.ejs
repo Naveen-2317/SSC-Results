@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/css/updateStudent.css" />
+</head>
+
+<body>
+
+    <form id="updateForm">
+        <h2>Student Form</h2>
+        <% if(student) { %>
+
+            <div class="grid">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required value="<%= student.name %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="rollNo">Roll No:</label>
+                    <input type="text" id="rollNo" name="rollNo" required value="<%= student.rollNo %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="telugu">Telugu Marks:</label>
+                    <input type="number" id="telugu" name="marks[telugu]" required value="<%= student.marks.telugu %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="english">English Marks:</label>
+                    <input type="number" id="english" name="marks[english]" required
+                        value="<%= student.marks.english %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="hindi">Hindi Marks:</label>
+                    <input type="number" id="hindi" name="marks[hindi]" required value="<%= student.marks.hindi %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="maths">Maths Marks:</label>
+                    <input type="number" id="maths" name="marks[maths]" required value="<%= student.marks.maths %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="science">Science Marks:</label>
+                    <input type="number" id="science" name="marks[science]" required
+                        value="<%= student.marks.science %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="social">Social Marks:</label>
+                    <input type="number" id="social" name="marks[social]" required value="<%= student.marks.social %>"
+                        min="0" max="100">
+                </div>
+
+                <button type="submit">Submit</button>
+            </div>
+
+            <% } %>
+
+    </form>
+    <script>
+        $(document).ready(function () {
+            $('#updateForm').on('submit', function (e) {
+                e.preventDefault();
+                let form = this
+                let formData = new FormData(form);
+                let rollNo = formData.get('rollNo');
+
+                $.ajax({
+                    url: `/api/admin/updateStudent/${rollNo}`, // Replace 123 with actual roll number
+                    method: 'PATCH',
+                    data: formData,
+                    processData: false, // Important when sending FormData
+                    contentType: false, // Important when sending FormData
+                    success: function (res) {
+                        alert(res.message);
+                        window.location.href = '/api/admin/allStudents';
+                    },
+                    error: function (xhr) {
+                        alert(xhr.responseJSON?.message || 'Something went wrong');
+                    }
+                });
+
+            })
+        })
+    </script>
+
+</body>
+
+</html>
