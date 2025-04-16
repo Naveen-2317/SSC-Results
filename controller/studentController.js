@@ -9,7 +9,7 @@ async function results(req, res) {
         //return res.json({results : studentResult})
         return res.render('results',{results : studentResult});
     } catch (error) {
-        return res.status(500).json({ message: "Something went wrong" });
+        return res.status(500).render("results",{ message: "Something went wrong" });
     }
 }
 

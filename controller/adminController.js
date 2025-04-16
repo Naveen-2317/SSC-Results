@@ -16,11 +16,11 @@ async function adminRegistration(req, res) {
             password: hashedPassword,
         });
         newAdmin.save();
-        return res.status(201).json({ message: "Admin registered successfully" });
+        return res.status(201).render("adminRegister",{ message: "Admin registered successfully" });
         //return res.redirect('/api/student/allStudents');
 
     } catch (error) {
-        return res.status(500).json({ message: "Something Went Wrong" });
+        return res.status(500).render("adminRegister",{ message: "Something Went Wrong" });
     }
 }
 
@@ -64,7 +64,7 @@ async function adminLogin(req, res) {
 
     } catch (error) {
         console.error("Login Error:", error);
-        return res.status(500).json({ message: "Something went wrong" });
+        return res.status(500).render("adminLogin",{ message: "Something went wrong" });
     }
 }
 
@@ -100,7 +100,7 @@ async function postStudentData(req, res) {
         //return res.json({message : "Student added successfully"})
         return res.redirect('allStudents');
     } catch (error) {
-        return res.status(500).json({ message: "Something went wrong" });
+        return res.status(500).render("addStudent",{ message: "Something went wrong" });
     }
 };
 
