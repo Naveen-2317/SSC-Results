@@ -17,7 +17,8 @@ async function adminRegistration(req, res) {
         });
         newAdmin.save();
         //return res.status(201).json({ message: "Admin registered successfully" });
-        return res.redirect('/api/admin/allStudents');
+        return res.render('home');
+        //return res.redirect('/api/admin/allStudents');
 
     } catch (error) {
         return res.status(500).render("adminRegister",{ message: "Something Went Wrong" });
