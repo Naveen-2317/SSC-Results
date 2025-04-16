@@ -12,6 +12,7 @@ body {
   color: #333;
   overflow-x: hidden;
   margin: 0;
+  text-align: center; /* Makes centering easier */
 }
 
 /* Student Info Card */
@@ -85,21 +86,12 @@ td:nth-child(4) {
 
 /* Message */
 h3 {
-  text-align: center;
   margin-top: 50px;
   color: #e74c3c;
   font-size: 20px;
 }
 
-/* Button Container */
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-/* Home Button */
+/* Home Button (Centered) */
 .home-btn {
   background-color: #007bff;
   color: white;
@@ -115,6 +107,7 @@ h3 {
   display: inline-block;
 }
 
+/* Hover Effect */
 .home-btn:hover {
   background-color: #0056b3;
 }
@@ -151,8 +144,7 @@ h3 {
   }
 
   .home-btn {
-    width: 100%;
-    text-align: center;
+    width: 90%;
     font-size: 15px;
     padding: 12px;
   }
