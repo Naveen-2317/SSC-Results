@@ -16,8 +16,8 @@ async function adminRegistration(req, res) {
             password: hashedPassword,
         });
         newAdmin.save();
-        return res.status(201).render("adminRegister",{ message: "Admin registered successfully" });
-        //return res.redirect('/api/student/allStudents');
+        //return res.status(201).json({ message: "Admin registered successfully" });
+        return res.redirect('/api/admin/allStudents');
 
     } catch (error) {
         return res.status(500).render("adminRegister",{ message: "Something Went Wrong" });
