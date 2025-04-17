@@ -22,6 +22,11 @@ route.get('/register',(req,res)=>{
 
 route.get('/login',(req,res)=>{
     res.render('adminLogin');
-})
+});
+
+route.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
+  });
 
 module.exports = route;

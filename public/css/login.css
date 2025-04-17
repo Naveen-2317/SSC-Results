@@ -111,4 +111,15 @@ body {
       font-size: 0.95rem;
     }
   }
+
+  .inline-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+    a{
+        text-decoration: none;
+    }
+  }
   

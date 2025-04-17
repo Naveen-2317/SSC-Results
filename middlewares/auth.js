@@ -6,7 +6,7 @@ const verifyAuth = (req, res, next) => {
 
     // Check if token exists
     if (!token) {
-        return res.render('adminLogin')
+        return res.render('adminLogin',{message : "UnAuthorised"})
     }
 
     jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
